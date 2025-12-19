@@ -16,12 +16,26 @@ A Model Context Protocol (MCP) server for resolving paper citations via Crossref
 # Clone the repository
 git clone https://github.com/h-lu/crossref-cite-mcp.git
 cd crossref-cite-mcp
+```
 
-# Install with pip (editable mode for development)
+### Using uv (Recommended)
+
+```bash
+# Install dependencies
+uv sync
+
+# Install with dev dependencies
+uv sync --extra dev
+```
+
+### Using pip
+
+```bash
+# Install from source
+pip install .
+
+# Or install in editable mode (for development)
 pip install -e ".[dev]"
-
-# Or install directly
-pip install crossref-cite-mcp
 ```
 
 ## Configuration
@@ -46,6 +60,24 @@ export LOG_LEVEL=INFO
 ### As MCP Server (Claude Desktop / Cursor)
 
 Add to your Claude Desktop config (`~/Library/Application Support/Claude/claude_desktop_config.json`):
+
+#### Using uv
+
+```json
+{
+  "mcpServers": {
+    "crossref-cite": {
+      "command": "uv",
+      "args": ["run", "--directory", "/path/to/crossref-cite-mcp", "python", "-m", "crossref_cite"],
+      "env": {
+        "CROSSREF_MAILTO": "your-email@example.com"
+      }
+    }
+  }
+}
+```
+
+#### Using pip (after `pip install .`)
 
 ```json
 {

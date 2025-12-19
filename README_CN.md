@@ -16,12 +16,29 @@
 # 克隆仓库
 git clone https://github.com/h-lu/crossref-cite-mcp.git
 cd crossref-cite-mcp
+```
 
-# 开发模式安装
+### 使用 uv（推荐）
+
+```bash
+# 安装依赖
+uv sync
+
+# 安装开发依赖
+uv sync --extra dev
+
+# 运行 MCP 服务器
+uv run python -m crossref_cite
+```
+
+### 使用 pip
+
+```bash
+# 从源码安装
+pip install .
+
+# 或以可编辑模式安装（开发推荐）
 pip install -e ".[dev]"
-
-# 或直接安装
-pip install crossref-cite-mcp
 ```
 
 ## ⚙️ 配置
@@ -46,6 +63,24 @@ export LOG_LEVEL=INFO
 ### 作为 MCP 服务器（Claude Desktop / Cursor）
 
 添加到 Claude Desktop 配置文件（`~/Library/Application Support/Claude/claude_desktop_config.json`）：
+
+#### 使用 uv
+
+```json
+{
+  "mcpServers": {
+    "crossref-cite": {
+      "command": "uv",
+      "args": ["run", "--directory", "/path/to/crossref-cite-mcp", "python", "-m", "crossref_cite"],
+      "env": {
+        "CROSSREF_MAILTO": "your-email@example.com"
+      }
+    }
+  }
+}
+```
+
+#### 使用 pip（需先执行 `pip install .`）
 
 ```json
 {
