@@ -26,9 +26,6 @@ uv sync
 
 # 安装开发依赖
 uv sync --extra dev
-
-# 运行 MCP 服务器
-uv run python -m crossref_cite
 ```
 
 ### 使用 pip
