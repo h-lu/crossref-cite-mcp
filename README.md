@@ -14,7 +14,7 @@ A Model Context Protocol (MCP) server for resolving paper citations via Crossref
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/crossref-cite-mcp.git
+git clone https://github.com/h-lu/crossref-cite-mcp.git
 cd crossref-cite-mcp
 
 # Install with pip (editable mode for development)

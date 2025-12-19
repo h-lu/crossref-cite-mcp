@@ -14,7 +14,7 @@
 
 ```bash
 # 克隆仓库
-git clone https://github.com/yourusername/crossref-cite-mcp.git
+git clone https://github.com/h-lu/crossref-cite-mcp.git
 cd crossref-cite-mcp
 
 # 开发模式安装
