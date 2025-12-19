@@ -12,29 +12,27 @@ A Model Context Protocol (MCP) server for resolving paper citations via Crossref
 
 ## Installation
 
+### From PyPI
+
+```bash
+# Using pip
+pip install crossref-cite-mcp
+
+# Using uv
+uv pip install crossref-cite-mcp
+```
+
+### From Source (for development)
+
 ```bash
 # Clone the repository
 git clone https://github.com/h-lu/crossref-cite-mcp.git
 cd crossref-cite-mcp
-```
 
-### Using uv (Recommended)
-
-```bash
-# Install dependencies
-uv sync
-
-# Install with dev dependencies
+# Using uv
 uv sync --extra dev
-```
 
-### Using pip
-
-```bash
-# Install from source
-pip install .
-
-# Or install in editable mode (for development)
+# Using pip
 pip install -e ".[dev]"
 ```
 
@@ -61,14 +59,12 @@ export LOG_LEVEL=INFO
 
 Add to your Claude Desktop config (`~/Library/Application Support/Claude/claude_desktop_config.json`):
 
-#### Using uv
-
 ```json
 {
   "mcpServers": {
     "crossref-cite": {
-      "command": "uv",
-      "args": ["run", "--directory", "/path/to/crossref-cite-mcp", "python", "-m", "crossref_cite"],
+      "command": "python",
+      "args": ["-m", "crossref_cite"],
       "env": {
         "CROSSREF_MAILTO": "your-email@example.com"
       }
@@ -77,14 +73,14 @@ Add to your Claude Desktop config (`~/Library/Application Support/Claude/claude_
 }
 ```
 
-#### Using pip (after `pip install .`)
+#### For Development (from source with uv)
 
 ```json
 {
   "mcpServers": {
     "crossref-cite": {
-      "command": "python",
-      "args": ["-m", "crossref_cite"],
+      "command": "uv",
+      "args": ["run", "--directory", "/path/to/crossref-cite-mcp", "python", "-m", "crossref_cite"],
       "env": {
         "CROSSREF_MAILTO": "your-email@example.com"
       }

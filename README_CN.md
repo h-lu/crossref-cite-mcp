@@ -12,29 +12,27 @@
 
 ## 📦 安装
 
+### 从 PyPI 安装
+
+```bash
+# 使用 pip
+pip install crossref-cite-mcp
+
+# 使用 uv
+uv pip install crossref-cite-mcp
+```
+
+### 从源码安装（开发用）
+
 ```bash
 # 克隆仓库
 git clone https://github.com/h-lu/crossref-cite-mcp.git
 cd crossref-cite-mcp
-```
 
-### 使用 uv（推荐）
-
-```bash
-# 安装依赖
-uv sync
-
-# 安装开发依赖
+# 使用 uv
 uv sync --extra dev
-```
 
-### 使用 pip
-
-```bash
-# 从源码安装
-pip install .
-
-# 或以可编辑模式安装（开发推荐）
+# 使用 pip
 pip install -e ".[dev]"
 ```
 
@@ -61,14 +59,12 @@ export LOG_LEVEL=INFO
 
 添加到 Claude Desktop 配置文件（`~/Library/Application Support/Claude/claude_desktop_config.json`）：
 
-#### 使用 uv
-
 ```json
 {
   "mcpServers": {
     "crossref-cite": {
-      "command": "uv",
-      "args": ["run", "--directory", "/path/to/crossref-cite-mcp", "python", "-m", "crossref_cite"],
+      "command": "python",
+      "args": ["-m", "crossref_cite"],
       "env": {
         "CROSSREF_MAILTO": "your-email@example.com"
       }
@@ -77,14 +73,14 @@ export LOG_LEVEL=INFO
 }
 ```
 
-#### 使用 pip（需先执行 `pip install .`）
+#### 开发模式（从源码使用 uv）
 
 ```json
 {
   "mcpServers": {
     "crossref-cite": {
-      "command": "python",
-      "args": ["-m", "crossref_cite"],
+      "command": "uv",
+      "args": ["run", "--directory", "/path/to/crossref-cite-mcp", "python", "-m", "crossref_cite"],
       "env": {
         "CROSSREF_MAILTO": "your-email@example.com"
       }
