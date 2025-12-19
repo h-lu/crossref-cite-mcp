@@ -10,7 +10,7 @@ readme = "README.md"
 license = "MIT"
 requires-python = ">=3.10"
 authors = [
-    { name = "Your Name", email = "your-email@example.com" }
+    { name = "Haibo Lu", email = "luhaibo1985@gmail.com" }
 ]
 keywords = ["mcp", "crossref", "citation", "bibtex", "bibliography", "doi"]
 classifiers = [
@@ -45,9 +45,9 @@ dev = [
 crossref-cite-mcp = "crossref_cite:main"
 
 [project.urls]
-Homepage = "https://github.com/yourusername/crossref-cite-mcp"
-Repository = "https://github.com/yourusername/crossref-cite-mcp"
-Issues = "https://github.com/yourusername/crossref-cite-mcp/issues"
+Homepage = "https://github.com/h-lu/crossref-cite-mcp"
+Repository = "https://github.com/h-lu/crossref-cite-mcp"
+Issues = "https://github.com/h-lu/crossref-cite-mcp/issues"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/crossref_cite"]
