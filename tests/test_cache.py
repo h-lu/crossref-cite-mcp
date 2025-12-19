@@ -1,7 +1,6 @@
 """Tests for cache backends."""
 
 import asyncio
-import time
 from pathlib import Path
 
 import pytest
@@ -34,10 +33,10 @@ class TestMemoryCache:
     async def test_expiration(self):
         cache = MemoryCache()
         await cache.set("key1", "value", ttl=1)
-        
+
         # Should exist immediately
         assert await cache.get("key1") == "value"
-        
+
         # Wait for expiration
         await asyncio.sleep(1.1)
         assert await cache.get("key1") is None
@@ -63,10 +62,10 @@ class TestMemoryCache:
         cache = MemoryCache()
         await cache.set("expires", "value", ttl=1)
         await cache.set("keeps", "value", ttl=3600)
-        
+
         await asyncio.sleep(1.1)
         removed = await cache.cleanup_expired()
-        
+
         assert removed == 1
         assert await cache.get("expires") is None
         assert await cache.get("keeps") == "value"
@@ -87,7 +86,7 @@ class TestJsonFileCache:
         # Write with one cache instance
         cache1 = JsonFileCache(temp_cache_path)
         await cache1.set("key1", "persisted", ttl=3600)
-        
+
         # Read with a new instance
         cache2 = JsonFileCache(temp_cache_path)
         result = await cache2.get("key1")
@@ -98,7 +97,7 @@ class TestJsonFileCache:
         deep_path = tmp_path / "a" / "b" / "c" / "cache.json"
         cache = JsonFileCache(deep_path)
         await cache.set("key1", "value", ttl=3600)
-        
+
         assert deep_path.exists()
         assert await cache.get("key1") == "value"
 
@@ -106,7 +105,7 @@ class TestJsonFileCache:
     async def test_expiration(self, temp_cache_path: Path):
         cache = JsonFileCache(temp_cache_path)
         await cache.set("key1", "value", ttl=1)
-        
+
         await asyncio.sleep(1.1)
         assert await cache.get("key1") is None
 
@@ -114,12 +113,12 @@ class TestJsonFileCache:
     async def test_handles_corrupt_file(self, temp_cache_path: Path):
         # Write invalid JSON
         temp_cache_path.write_text("not valid json {{{")
-        
+
         cache = JsonFileCache(temp_cache_path)
         # Should not crash, should return None
         result = await cache.get("key1")
         assert result is None
-        
+
         # Should be able to write new data
         await cache.set("key1", "value", ttl=3600)
         assert await cache.get("key1") == "value"

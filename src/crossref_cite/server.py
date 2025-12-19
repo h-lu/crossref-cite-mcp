@@ -10,7 +10,7 @@ from __future__ import annotations
 import json
 import logging
 import sys
-from typing import Any, Optional
+from typing import Any
 
 from mcp.server.fastmcp import FastMCP
 
@@ -31,7 +31,7 @@ logger = logging.getLogger("crossref_cite")
 mcp = FastMCP("crossref-cite")
 
 # Global cache instance (lazy init)
-_cache: Optional[CacheBackend] = None
+_cache: CacheBackend | None = None
 
 
 def get_cache() -> CacheBackend:
@@ -212,9 +212,9 @@ async def resolve_citation(
         filter_params = _build_filter_string(filter_from_year, filter_to_year, filter_type)
 
         candidates: list[dict[str, Any]] = []
-        doi: Optional[str] = None
-        top_score: Optional[float] = None
-        total_results: Optional[int] = None
+        doi: str | None = None
+        top_score: float | None = None
+        total_results: int | None = None
 
         # If search_only mode with filters, always do a search even for DOI-like input
         force_search = search_only and filter_params

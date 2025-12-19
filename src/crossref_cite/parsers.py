@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import re
 from dataclasses import dataclass
-from typing import Literal, Optional
+from typing import Literal
 
 # DOI pattern: 10.XXXX/... (handles most DOI formats)
 # Reference: https://www.doi.org/doi_handbook/2_Numbering.html
@@ -51,7 +51,7 @@ class ParsedInput:
     original: str  # Original input string
 
 
-def extract_doi(text: str) -> Optional[str]:
+def extract_doi(text: str) -> str | None:
     """
     Extract DOI from text.
 
@@ -81,7 +81,7 @@ def extract_doi(text: str) -> Optional[str]:
     return None
 
 
-def extract_pmid(text: str) -> Optional[str]:
+def extract_pmid(text: str) -> str | None:
     """
     Extract PMID from text.
 
@@ -106,7 +106,7 @@ def extract_pmid(text: str) -> Optional[str]:
     return None
 
 
-def extract_arxiv(text: str) -> Optional[str]:
+def extract_arxiv(text: str) -> str | None:
     """
     Extract arXiv ID from text.
 

@@ -5,7 +5,7 @@ from __future__ import annotations
 import asyncio
 import logging
 import random
-from typing import Any, Optional
+from typing import Any
 
 import httpx
 
@@ -61,8 +61,8 @@ async def request_with_backoff(
     method: str,
     url: str,
     *,
-    params: Optional[dict[str, Any]] = None,
-    headers: Optional[dict[str, str]] = None,
+    params: dict[str, Any] | None = None,
+    headers: dict[str, str] | None = None,
     max_retries: int = 5,
 ) -> httpx.Response:
     """
@@ -87,7 +87,7 @@ async def request_with_backoff(
     Raises:
         httpx.RequestError: If all retries fail
     """
-    last_error: Optional[Exception] = None
+    last_error: Exception | None = None
 
     for attempt in range(max_retries + 1):
         try:
@@ -159,7 +159,7 @@ async def search_crossref(
     query: str,
     rows: int = 5,
     *,
-    filter_params: Optional[dict[str, str]] = None,
+    filter_params: dict[str, str] | None = None,
 ) -> dict[str, Any]:
     """
     Search Crossref works API with bibliographic query.
@@ -287,10 +287,7 @@ async def content_negotiate(
             # Parse based on content type
             content_type = response.headers.get("content-type", "")
 
-            if "json" in content_type:
-                data = response.json()
-            else:
-                data = response.text
+            data = response.json() if "json" in content_type else response.text
 
             return {
                 "ok": True,

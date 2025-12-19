@@ -7,9 +7,9 @@ import json
 import logging
 import time
 from abc import ABC, abstractmethod
-from dataclasses import asdict, dataclass
+from dataclasses import dataclass
 from pathlib import Path
-from typing import Any, Optional
+from typing import Any
 
 logger = logging.getLogger("crossref_cite.cache")
 
@@ -30,7 +30,7 @@ class CacheBackend(ABC):
     """Abstract base class for cache backends."""
 
     @abstractmethod
-    async def get(self, key: str) -> Optional[Any]:
+    async def get(self, key: str) -> Any | None:
         """Get a value from cache, or None if not found/expired."""
         ...
 
@@ -57,7 +57,7 @@ class MemoryCache(CacheBackend):
         self._store: dict[str, CacheEntry] = {}
         self._lock = asyncio.Lock()
 
-    async def get(self, key: str) -> Optional[Any]:
+    async def get(self, key: str) -> Any | None:
         async with self._lock:
             entry = self._store.get(key)
             if entry is None:
@@ -120,7 +120,7 @@ class JsonFileCache(CacheBackend):
                 if isinstance(data, dict):
                     self._store = data
                     logger.debug("Loaded %d entries from cache file", len(self._store))
-            except (json.JSONDecodeError, IOError) as e:
+            except (OSError, json.JSONDecodeError) as e:
                 logger.warning("Failed to load cache file: %s", e)
                 self._store = {}
         else:
@@ -147,10 +147,10 @@ class JsonFileCache(CacheBackend):
 
             self._dirty = False
             logger.debug("Saved %d entries to cache file", len(self._store))
-        except IOError as e:
+        except OSError as e:
             logger.error("Failed to save cache file: %s", e)
 
-    async def get(self, key: str) -> Optional[Any]:
+    async def get(self, key: str) -> Any | None:
         async with self._lock:
             await self._ensure_loaded()
 
@@ -217,7 +217,7 @@ class JsonFileCache(CacheBackend):
             return len(expired_keys)
 
 
-def create_cache(backend: str, path: Optional[Path] = None) -> CacheBackend:
+def create_cache(backend: str, path: Path | None = None) -> CacheBackend:
     """
     Factory function to create appropriate cache backend.
 

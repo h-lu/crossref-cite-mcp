@@ -1,6 +1,5 @@
 """Tests for identifier parsing and extraction."""
 
-import pytest
 
 from crossref_cite.parsers import (
     extract_arxiv,
