@@ -1,6 +1,10 @@
-# crossref-cite-mcp
+# Crossref Cite MCP Server
 
-A Model Context Protocol (MCP) server for resolving paper citations via Crossref API. Supports multiple output formats including CSL-JSON, BibTeX, RIS, and formatted text.
+A [Model Context Protocol (MCP)](https://modelcontextprotocol.io/) server for resolving paper citations via Crossref API. Supports multiple output formats including CSL-JSON, BibTeX, RIS, and formatted text. Designed for LLM tools like Claude Desktop, Cursor, etc.
+
+[![PyPI version](https://badge.fury.io/py/crossref-cite-mcp.svg)](https://badge.fury.io/py/crossref-cite-mcp) ![License](https://img.shields.io/badge/license-MIT-blue.svg) ![Python](https://img.shields.io/badge/python-3.10+-blue.svg)
+
+**[中文文档](README_CN.md)**
 
 ## Features
 

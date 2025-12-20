@@ -1,6 +1,10 @@
-# crossref-cite-mcp
+# Crossref Cite MCP Server
 
-基于 Model Context Protocol (MCP) 的 Crossref 引用解析工具。支持通过标题、DOI、PMID 等查询论文，并返回多种引用格式（CSL-JSON、BibTeX、RIS、格式化文本）。
+基于 [Model Context Protocol (MCP)](https://modelcontextprotocol.io/) 的 Crossref 引用解析工具。支持通过标题、DOI、PMID 等查询论文，并返回多种引用格式（CSL-JSON、BibTeX、RIS、格式化文本）。专为 Claude Desktop、Cursor 等 LLM 工具设计。
+
+[![PyPI version](https://badge.fury.io/py/crossref-cite-mcp.svg)](https://badge.fury.io/py/crossref-cite-mcp) ![License](https://img.shields.io/badge/license-MIT-blue.svg) ![Python](https://img.shields.io/badge/python-3.10+-blue.svg)
+
+**[English](README.md)**
 
 ## ✨ 功能特性
 
